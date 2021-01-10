@@ -1,14 +1,16 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "./App.css";
 
 const accessKey = process.env.REACT_APP_UNSPLASH_ACCESS_KEY;
 
 export default function App() {
+  const [images, setImages] = useState([]);
   useEffect(() => {
     fetch(`https://api.unsplash.com/photos/?client_id=${accessKey}`)
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
+        setImages(data);
       });
   }, []);
 
