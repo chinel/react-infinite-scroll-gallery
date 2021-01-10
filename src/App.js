@@ -32,9 +32,9 @@ export default function App() {
       </form>
 
       <div className="image-grid">
-        {[...Array(100)].map((_, index) => (
+        {images.map((image, index) => (
           <div className="image" key={index}>
-            <img src="https://placekitten.com/g/1920/1080" alt="Sample" />
+            <img src={image.urls.regular} alt={image.alt_description} />
           </div>
         ))}
       </div>
