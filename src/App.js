@@ -5,8 +5,7 @@ const accessKey = process.env.REACT_APP_UNSPLASH_ACCESS_KEY;
 
 export default function App() {
   useEffect(() => {
-    console.log(accessKey);
-    fetch("https://api.unsplash.com/photos/?client_id=YOUR_ACCESS_KEY")
+    fetch(`https://api.unsplash.com/photos/?client_id=${accessKey}`)
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
