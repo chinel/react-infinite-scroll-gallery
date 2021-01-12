@@ -8,10 +8,6 @@ export default function App() {
   const [images, setImages] = useState([]);
   const [page, setPage] = useState(1);
   useEffect(() => {
-    getPhotos();
-  }, []);
-
-  function getPhotos() {
     fetch(
       `https://api.unsplash.com/photos/?client_id=${accessKey}&page=${page}`
     )
@@ -20,7 +16,8 @@ export default function App() {
         console.log(data);
         setImages((images) => [...images, ...data]);
       });
-  }
+  }, [page]);
+
   //if no access key throw error
   if (!accessKey) {
     return (
@@ -39,7 +36,7 @@ export default function App() {
       </form>
       <InfiniteScroll
         dataLength={images.length} //This is important field to render the next data
-        next={getPhotos}
+        next={() => setPage((page) => page + 1)}
         hasMore={true}
         loader={<h4>Loading...</h4>}
       >
