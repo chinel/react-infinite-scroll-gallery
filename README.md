@@ -2,7 +2,7 @@
 
 ### [Live Site](https://happy-bhabha-676a03.netlify.app)
 
-![React Pomodoro App](https://i.imgur.com/2bIfY43.png)
+![React Infinite Scroll Gallery](https://i.imgur.com/5gP7dj0.png)
 
 ## Introduction
 
