@@ -8,11 +8,8 @@ export default function App() {
   const [images, setImages] = useState([]);
   const [query, setQuery] = useState("");
   const [page, setPage] = useState(1);
-  useEffect(() => {
-    getPhotos();
-  }, [page]);
 
-  function getPhotos() {
+  const getPhotos = React.useCallback(() => {
     let apiUrl = `https://api.unsplash.com/photos/?`;
     if (query)
       apiUrl = `https://api.unsplash.com/search/photos/?query=${query}`;
@@ -20,7 +17,7 @@ export default function App() {
     apiUrl += `&page=${page}`;
     apiUrl += `&client_id=${accessKey}`;
 
-    console.log(apiUrl);
+    // console.log(apiUrl);
     fetch(apiUrl)
       .then((response) => response.json())
       .then((data) => {
@@ -32,7 +29,11 @@ export default function App() {
         setImages((images) => [...images, ...imagesFromApi]);
       })
       .catch((err) => console.err(err));
-  }
+  }, [page, query]);
+
+  useEffect(() => {
+    getPhotos();
+  }, [page, getPhotos]);
 
   function searchPhotos(e) {
     e.preventDefault();
