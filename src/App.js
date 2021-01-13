@@ -6,6 +6,7 @@ const accessKey = process.env.REACT_APP_UNSPLASH_ACCESS_KEY;
 
 export default function App() {
   const [images, setImages] = useState([]);
+  const [query, setQuery] = useState("");
   const [page, setPage] = useState(1);
   useEffect(() => {
     fetch(
@@ -44,7 +45,12 @@ export default function App() {
       <h1>Unsplash Image Gallery!</h1>
 
       <form onSubmit={searchPhotos}>
-        <input type="text" placeholder="Search Unsplash..." />
+        <input
+          type="text"
+          placeholder="Search Unsplash..."
+          value={query}
+          onChange={(event) => setQuery(event.target.value)}
+        />
         <button>Search</button>
       </form>
       <InfiniteScroll
