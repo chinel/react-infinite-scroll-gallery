@@ -1,6 +1,6 @@
 # React Infinite Scroll Gallery
 
-### [Live Site](https://happy-bhabha-676a03.netlify.app)
+### [Live Site](https://focused-shaw-e88db4.netlify.app)
 
 ![React Infinite Scroll Gallery](https://i.imgur.com/5gP7dj0.png)
 
