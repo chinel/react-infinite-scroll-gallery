@@ -18,6 +18,19 @@ export default function App() {
       });
   }, [page]);
 
+  function searchPhotos(e) {
+    e.preventDefault();
+    fetch(
+      `https://api.unsplash.com/search/photos/?client_id=${accessKey}&page=${page}`
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        setImages((images) => [...images, ...data.results]);
+      })
+      .catch((err) => console.err(err));
+  }
+
   //if no access key throw error
   if (!accessKey) {
     return (
@@ -30,7 +43,7 @@ export default function App() {
     <div className="app">
       <h1>Unsplash Image Gallery!</h1>
 
-      <form>
+      <form onSubmit={searchPhotos}>
         <input type="text" placeholder="Search Unsplash..." />
         <button>Search</button>
       </form>
