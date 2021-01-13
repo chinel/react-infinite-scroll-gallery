@@ -13,13 +13,22 @@ export default function App() {
   }, [page]);
 
   function getPhotos() {
-    fetch(
-      `https://api.unsplash.com/photos/?client_id=${accessKey}&page=${page}`
-    )
+    let apiUrl = `https://api.unsplash.com/photos/?`;
+    if (query) apiUrl = `https://api.unsplash.com/photos/?query=${query}`;
+
+    apiUrl += `&page=${page}`;
+    apiUrl += `&client_id=${accessKey}`;
+
+    console.log(apiUrl);
+    fetch(apiUrl)
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
-        setImages((images) => [...images, ...data]);
+        const imagesFromApi = data.results ?? data;
+        //if page is 1, then we need a whole new array of images
+        if (page === 1) setImages(imagesFromApi);
+
+        //if page > 1, then we are adding for our infinite scroll
+        setImages((images) => [...images, ...imagesFromApi]);
       })
       .catch((err) => console.err(err));
   }
