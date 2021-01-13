@@ -9,6 +9,10 @@ export default function App() {
   const [query, setQuery] = useState("");
   const [page, setPage] = useState(1);
   useEffect(() => {
+    getPhotos();
+  }, [page]);
+
+  function getPhotos() {
     fetch(
       `https://api.unsplash.com/photos/?client_id=${accessKey}&page=${page}`
     )
@@ -16,20 +20,14 @@ export default function App() {
       .then((data) => {
         console.log(data);
         setImages((images) => [...images, ...data]);
-      });
-  }, [page]);
+      })
+      .catch((err) => console.err(err));
+  }
 
   function searchPhotos(e) {
     e.preventDefault();
-    fetch(
-      `https://api.unsplash.com/search/photos/?client_id=${accessKey}&page=${page}`
-    )
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data);
-        setImages((images) => [...images, ...data.results]);
-      })
-      .catch((err) => console.err(err));
+    setPage(1);
+    getPhotos();
   }
 
   //if no access key throw error
