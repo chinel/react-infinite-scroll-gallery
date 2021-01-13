@@ -14,7 +14,8 @@ export default function App() {
 
   function getPhotos() {
     let apiUrl = `https://api.unsplash.com/photos/?`;
-    if (query) apiUrl = `https://api.unsplash.com/photos/?query=${query}`;
+    if (query)
+      apiUrl = `https://api.unsplash.com/search/photos/?query=${query}`;
 
     apiUrl += `&page=${page}`;
     apiUrl += `&client_id=${accessKey}`;
